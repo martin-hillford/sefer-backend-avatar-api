@@ -1,0 +1,34 @@
+// ReSharper disable PropertyCanBeMadeInitOnly.Global
+namespace Sefer.Backend.Avatar.Api;
+
+public class Response
+{
+    public string? Base64 { get; set; }
+
+    public string? Content { get; set; }
+
+    public string? ContentType { get; set; }
+
+    public DateTime? Expires { get; set; }
+
+    [JsonIgnore]
+    public bool IsBase64 => !string.IsNullOrEmpty(Base64);
+
+    [JsonIgnore]
+    public bool HasImage => (!string.IsNullOrEmpty(Base64) || !string.IsNullOrEmpty(Content)) && !string.IsNullOrEmpty(ContentType);
+    
+    public static Response Empty()
+    {
+        return new Response { Expires = DateTime.UtcNow.AddHours(12) };
+    }
+
+    public static Response FromBase64(string? base64, string? contentType, DateTime? expires = null)
+    {
+        return new Response { Base64 = base64, ContentType = contentType, Expires = expires };
+    }
+
+    public static Response FromString(string? content, string? contentType, DateTime? expires = null)
+    {
+        return new Response { Content = content, ContentType = contentType, Expires = expires };
+    }
+}
