@@ -6,11 +6,12 @@
     <Authors>Martin Hillford</Authors>
     <Copyright>2016-2025, Martin Hillford</Copyright>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-    <Version>1.6.1</Version>
+    <Version>1.6.2</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.24.0" />
     <PackageReference Include="Sefer.Backend.SharedConfig.Lib" Version="1.1.0" />
     <PackageReference Include="Sefer.Backend.Support.Lib" Version="1.1.0" />
+    <PackageReference Include="Sefer.Backend.Authentication.Lib" Version="1.1.10" />
   </ItemGroup>
 </Project>

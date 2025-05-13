@@ -17,18 +17,11 @@ public class Response
     [JsonIgnore]
     public bool HasImage => (!string.IsNullOrEmpty(Base64) || !string.IsNullOrEmpty(Content)) && !string.IsNullOrEmpty(ContentType);
     
-    public static Response Empty()
-    {
-        return new Response { Expires = DateTime.UtcNow.AddHours(12) };
-    }
+    public static Response Empty() => new() { Expires = DateTime.UtcNow.AddHours(12) };
 
     public static Response FromBase64(string? base64, string? contentType, DateTime? expires = null)
-    {
-        return new Response { Base64 = base64, ContentType = contentType, Expires = expires };
-    }
+        => new () { Base64 = base64, ContentType = contentType, Expires = expires };
 
     public static Response FromString(string? content, string? contentType, DateTime? expires = null)
-    {
-        return new Response { Content = content, ContentType = contentType, Expires = expires };
-    }
+        => new() { Content = content, ContentType = contentType, Expires = expires };
 }

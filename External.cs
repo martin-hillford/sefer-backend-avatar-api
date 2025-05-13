@@ -1,10 +1,10 @@
 namespace Sefer.Backend.Avatar.Api;
 
-public class External(HttpClient client, IConfiguration configuration)
+public class External(HttpClient client)
 {
-    private readonly Gravatar _gravatar = new(client, configuration);
+    private readonly Gravatar _gravatar = new(client);
 
-    private readonly Libravatar _libravater = new(client, configuration);
+    private readonly Libravatar _libravater = new(client);
 
     public async Task<Response?> Retrieve(string hash, int size)
     {

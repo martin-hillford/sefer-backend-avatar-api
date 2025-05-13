@@ -5,8 +5,12 @@ public class AccessToken(IConfiguration configuration)
     // NB. the duration should be slightly higher than the allowed cache duration
     private const int Duration = 3800;
 
-    private readonly string? _apiKey = configuration.GetSection("Avatar").GetValue<string>("ApiKey");
+    private readonly string? _apiKey = 
+        EnvVar.GetEnvironmentVariable("AVATAR_API_KEY") ??
+        configuration.GetSection("Avatar").GetValue<string>("ApiKey");
 
+    internal static AccessToken Create(IConfiguration configuration) => new(configuration); 
+    
     public bool IsValidToken(string token)
     {
         try
@@ -23,7 +27,7 @@ public class AccessToken(IConfiguration configuration)
         catch (Exception) { return false; }
     }
 
-    public string CreateToken(long unixTime, string apiKey)
+    private static string CreateToken(long unixTime, string apiKey)
     {
         var data = unixTime + apiKey;
         var bytes = Encoding.UTF8.GetBytes(data);

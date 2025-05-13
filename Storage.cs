@@ -4,9 +4,13 @@ public class Storage(IConfiguration configuration)
 {
     #region Settings
 
-    private readonly string? _store = configuration.GetSection("Avatar").GetValue<string>("Store");
+    private readonly string? _store = 
+        EnvVar.GetEnvironmentVariable("AVATAR_STORE") ??
+        configuration.GetSection("Avatar").GetValue<string>("Store");
 
-    private readonly bool _useBlob = configuration.GetSection("Avatar").GetValue<bool>("UseBlob");
+    private readonly bool _useBlob = 
+        EnvVar.GetEnvironmentVariable("AVATAR_USE_BLOB")?.ToLower() == "true" ||
+        configuration.GetSection("Avatar").GetValue<bool>("UseBlob");
 
     #endregion
 

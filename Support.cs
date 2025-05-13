@@ -15,7 +15,7 @@ public class Support(IConfiguration configuration)
         return fallback.Send();
     }
 
-    public async Task<Response?> DownloadImageAsync(HttpClient client, string imageUri)
+    public static async Task<Response?> DownloadImageAsync(HttpClient client, string imageUri)
     {
         try
         {
